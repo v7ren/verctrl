@@ -1,11 +1,11 @@
 
-# verctrl
+# versctrl
 
 Lightweight version control CLI tool with smart file detection and PyQt6 GUI
 
 ## Overview
 
-verctrl is a simple yet powerful version control tool designed for quick file backups with intelligent file detection. It provides both command-line and GUI interfaces for managing file versions.
+versctrl is a simple yet powerful version control tool designed for quick file backups with intelligent file detection. It provides both command-line and GUI interfaces for managing file versions.
 
 ## Features
 
@@ -28,45 +28,32 @@ verctrl is a simple yet powerful version control tool designed for quick file ba
 ### Method 1: Install from PyPI (Recommended)
 
 ```bash
-# Install verctrl globally
-pip install verctrl
+# Install versctrl globally
+pip install versctrl
 
 # With GUI support
-pip install verctrl[gui]
+pip install versctrl[gui]
 
 # With all optional features
-pip install verctrl[all]
+pip install versctrl[all]
 ```
 
-After installation, `verctrl` will be available globally in your terminal from any directory.
+After installation, `versctrl` will be available globally in your terminal from any directory.
 
-### Method 2: Install from Source
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/verctrl.git
-cd verctrl
-
-# Install in development mode
-pip install -e .
-
-# Or install with optional dependencies
-pip install -e .[all]
-```
 
 ### Verify Installation
 
 ```bash
-# Check if verctrl is accessible
-verctrl --help
+# Check if versctrl is accessible
+versctrl --help
 
 # Check version
-verctrl --version
+versctrl --version
 ```
 
 ### Setting Up PATH (If Needed)
 
-If `verctrl` is not recognized after installation, you may need to add Python's Scripts directory to your PATH:
+If `versctrl` is not recognized after installation, you may need to add Python's Scripts directory to your PATH:
 
 #### Windows
 
@@ -107,13 +94,13 @@ source ~/.zshrc
 #### Verify PATH Setup
 
 ```bash
-# Check if verctrl is in PATH
-which verctrl  # macOS/Linux
-where verctrl  # Windows
+# Check if versctrl is in PATH
+which versctrl  # macOS/Linux
+where versctrl  # Windows
 
 # Should output something like:
-# /home/username/.local/bin/verctrl
-# or C:\Users\Username\AppData\Local\Programs\Python\Python3X\Scripts\verctrl.exe
+# /home/username/.local/bin/versctrl
+# or C:\Users\Username\AppData\Local\Programs\Python\Python3X\Scripts\versctrl.exe
 ```
 
 ### Optional Dependencies
@@ -133,16 +120,16 @@ pip install PyQt6 lucide-py
 
 ```bash
 # Upgrade to latest version
-pip install --upgrade verctrl
+pip install --upgrade versctrl
 
 # Upgrade with all features
-pip install --upgrade verctrl[all]
+pip install --upgrade versctrl[all]
 ```
 
 ### Uninstallation
 
 ```bash
-pip uninstall verctrl
+pip uninstall versctrl
 ```
 
 ## Quick Start
@@ -153,18 +140,18 @@ pip uninstall verctrl
 # Navigate to your project directory
 cd /path/to/your/project
 
-# Initialize verctrl
-verctrl --init
+# Initialize versctrl
+versctrl --init
 ```
 
-This creates a `verctrl.json` configuration file in your current directory.
+This creates a `versctrl.json` configuration file in your current directory.
 
 ### 2. Select Files
 
 #### Using GUI (Recommended)
 
 ```bash
-verctrl --select
+versctrl --select
 ```
 
 This launches a modern file browser with:
@@ -177,25 +164,25 @@ This launches a modern file browser with:
 
 ```bash
 # Add source files (respects .gitignore)
-verctrl --smart-add smart
+versctrl --smart-add smart
 
 # Add Python files only
-verctrl --smart-add python
+versctrl --smart-add python
 
 # Add recently modified files
-verctrl --smart-add recent --days 7
+versctrl --smart-add recent --days 7
 
 # Add web-related files
-verctrl --smart-add web
+versctrl --smart-add web
 
 # Add all non-excluded files
-verctrl --smart-add all
+versctrl --smart-add all
 ```
 
 ### 3. Create Backup
 
 ```bash
-verctrl --new
+versctrl --new
 ```
 
 This creates backups of all tracked files according to your configuration.
@@ -203,7 +190,7 @@ This creates backups of all tracked files according to your configuration.
 ### 4. List Backups
 
 ```bash
-verctrl --list
+versctrl --list
 ```
 
 Shows all existing backups with size and modification date.
@@ -211,39 +198,39 @@ Shows all existing backups with size and modification date.
 ### 5. Restore Backup
 
 ```bash
-verctrl --restore filename-v1.txt
+versctrl --restore filename-v1.txt
 ```
 
 Restores a specific backup to its original location.
 
 ## Global Usage
 
-Once installed, you can use `verctrl` from anywhere:
+Once installed, you can use `versctrl` from anywhere:
 
 ```bash
 # Backup your documents
 cd ~/Documents/important-project
-verctrl --init
-verctrl --smart-add smart
-verctrl --new
+versctrl --init
+versctrl --smart-add smart
+versctrl --new
 
 # Backup your code
 cd ~/Code/my-app
-verctrl --init
-verctrl --select
-verctrl --new
+versctrl --init
+versctrl --select
+versctrl --new
 
 # Use different configs for different projects
 cd ~/project1
-verctrl --config project1.json --new
+versctrl --config project1.json --new
 
 cd ~/project2
-verctrl --config project2.json --new
+versctrl --config project2.json --new
 ```
 
 ## Configuration
 
-The `verctrl.json` file contains:
+The `versctrl.json` file contains:
 
 ```json
 {
@@ -252,7 +239,7 @@ The `verctrl.json` file contains:
     "config.yaml",
     "README.md"
   ],
-  "backup_dir": ".verctrl_backups",
+  "backup_dir": ".versctrl_backups",
   "naming_scheme": "version",
   "keep_history": 5,
   "create_new_file": false
@@ -264,7 +251,7 @@ The `verctrl.json` file contains:
 | Option | Description | Default |
 |--------|-------------|---------|
 | `files` | List of files to track | `[]` |
-| `backup_dir` | Directory for backups | `.verctrl_backups` |
+| `backup_dir` | Directory for backups | `.versctrl_backups` |
 | `naming_scheme` | `version`, `timestamp`, or `simple` | `version` |
 | `keep_history` | Number of backups to keep | `5` |
 | `create_new_file` | Create empty file after backup | `false` |
@@ -299,7 +286,7 @@ All source code files regardless of .gitignore:
 Files modified within specified days:
 
 ```bash
-verctrl --smart-add recent --days 7
+versctrl --smart-add recent --days 7
 ```
 
 ### python
@@ -322,7 +309,7 @@ All files except default exclusions
 ### Initialize
 
 ```bash
-verctrl --init
+versctrl --init
 ```
 
 Creates default configuration file.
@@ -331,39 +318,39 @@ Creates default configuration file.
 
 ```bash
 # GUI selector
-verctrl --select
+versctrl --select
 
 # Smart add with strategy
-verctrl --smart-add STRATEGY [--days N]
+versctrl --smart-add STRATEGY [--days N]
 ```
 
 ### Backup Operations
 
 ```bash
 # Create new backup
-verctrl --new
+versctrl --new
 
 # List all backups
-verctrl --list
+versctrl --list
 
 # Restore specific backup
-verctrl --restore FILENAME
+versctrl --restore FILENAME
 ```
 
 ### Information
 
 ```bash
 # Show statistics
-verctrl --stats
+versctrl --stats
 
 # Show version
-verctrl --version
+versctrl --version
 
 # Show help
-verctrl --help
+versctrl --help
 
 # Use custom config file
-verctrl --config path/to/config.json
+versctrl --config path/to/config.json
 ```
 
 ## Statistics
@@ -397,7 +384,7 @@ Tracked Files: 15
     .yaml: 1
     .txt: 1
 
-Backup Directory: .verctrl_backups
+Backup Directory: .versctrl_backups
   Total Backups: 42
   Total Size: 12.3 MB
   Oldest: 2024-01-15 10:30:00
@@ -413,7 +400,7 @@ Configuration:
 
 ## Default Exclusions
 
-verctrl automatically excludes:
+versctrl automatically excludes:
 
 ### Version Control
 - .git, .svn, .hg, .bzr
@@ -443,7 +430,7 @@ verctrl automatically excludes:
 
 ## Gitignore Support
 
-verctrl respects .gitignore patterns in your project root:
+versctrl respects .gitignore patterns in your project root:
 
 ```gitignore
 # Example .gitignore
@@ -491,9 +478,9 @@ Track source files while excluding dependencies:
 
 ```bash
 cd /path/to/project
-verctrl --init
-verctrl --smart-add smart
-verctrl --new
+versctrl --init
+versctrl --smart-add smart
+versctrl --new
 ```
 
 ### Configuration Management
@@ -502,9 +489,9 @@ Track config files only:
 
 ```bash
 cd /path/to/configs
-verctrl --init
-# Manually edit verctrl.json to add config files
-verctrl --new
+versctrl --init
+# Manually edit versctrl.json to add config files
+versctrl --new
 ```
 
 ### Document Versioning
@@ -513,9 +500,9 @@ Track recently modified documents:
 
 ```bash
 cd ~/Documents/thesis
-verctrl --init
-verctrl --smart-add recent --days 7
-verctrl --new
+versctrl --init
+versctrl --smart-add recent --days 7
+versctrl --new
 ```
 
 ### Web Development
@@ -524,9 +511,9 @@ Track web project files:
 
 ```bash
 cd ~/Sites/my-website
-verctrl --init
-verctrl --smart-add web
-verctrl --new
+versctrl --init
+versctrl --smart-add web
+versctrl --new
 ```
 
 ### Multiple Projects
@@ -536,47 +523,47 @@ Manage backups across different projects:
 ```bash
 # Setup project 1
 cd ~/project1
-verctrl --init
-verctrl --smart-add smart
-verctrl --new
+versctrl --init
+versctrl --smart-add smart
+versctrl --new
 
 # Setup project 2
 cd ~/project2
-verctrl --init
-verctrl --smart-add python
-verctrl --new
+versctrl --init
+versctrl --smart-add python
+versctrl --new
 
 # Later, create backups from anywhere
-cd ~/project1 && verctrl --new
-cd ~/project2 && verctrl --new
+cd ~/project1 && versctrl --new
+cd ~/project2 && versctrl --new
 ```
 
 ## Best Practices
 
 1. **Use Smart Detection**: Start with `--smart-add smart` for most projects
 2. **Review Selection**: Use `--select` GUI to review auto-detected files
-3. **Regular Backups**: Run `verctrl --new` before major changes
+3. **Regular Backups**: Run `versctrl --new` before major changes
 4. **Check Statistics**: Use `--stats` to monitor backup growth
 5. **Adjust History**: Set `keep_history` based on your needs
 6. **Custom Config**: Use `--config` for different project profiles
-7. **Per-Project Setup**: Initialize verctrl in each project directory
+7. **Per-Project Setup**: Initialize versctrl in each project directory
 8. **Backup Before Updates**: Create backups before major refactoring
 
 ## Troubleshooting
 
 ### Command Not Found
 
-If `verctrl` is not recognized:
+If `versctrl` is not recognized:
 
 ```bash
 # Check if pip installed it correctly
-pip show verctrl
+pip show versctrl
 
 # Check Python Scripts directory
 python -m site --user-base
 
 # Try running with python -m
-python -m verctrl --help
+python -m versctrl --help
 ```
 
 Then add the Scripts directory to your PATH (see installation section).
@@ -596,7 +583,7 @@ Ensure you have write permissions for:
 
 On Unix systems:
 ```bash
-chmod +x ~/.local/bin/verctrl
+chmod +x ~/.local/bin/versctrl
 ```
 
 ### Missing Files Warning
@@ -604,7 +591,7 @@ chmod +x ~/.local/bin/verctrl
 Files listed in config but not found on disk will show warnings. Update config with:
 
 ```bash
-verctrl --select
+versctrl --select
 ```
 
 ### Large Backup Size
@@ -623,8 +610,8 @@ If you get import errors:
 
 ```bash
 # Reinstall with all dependencies
-pip uninstall verctrl
-pip install verctrl[all]
+pip uninstall versctrl
+pip install versctrl[all]
 ```
 
 ## Advanced Usage
@@ -633,13 +620,13 @@ pip install verctrl[all]
 
 ```bash
 # Development config
-verctrl --config dev.json --new
+versctrl --config dev.json --new
 
 # Production config
-verctrl --config prod.json --new
+versctrl --config prod.json --new
 
 # Testing config
-verctrl --config test.json --new
+versctrl --config test.json --new
 ```
 
 ### Automation with Scripts
@@ -658,7 +645,7 @@ projects=(
 
 for project in "${projects[@]}"; do
   echo "Backing up $project..."
-  cd "$project" && verctrl --new
+  cd "$project" && versctrl --new
 done
 ```
 
@@ -676,7 +663,7 @@ $projects = @(
 foreach ($project in $projects) {
   Write-Host "Backing up $project..."
   Set-Location $project
-  verctrl --new
+  versctrl --new
 }
 ```
 
@@ -689,10 +676,10 @@ foreach ($project in $projects) {
 crontab -e
 
 # Add daily backup at 6 PM
-0 18 * * * cd /path/to/project && /home/user/.local/bin/verctrl --new
+0 18 * * * cd /path/to/project && /home/user/.local/bin/versctrl --new
 
 # Add hourly backup during work hours
-0 9-17 * * 1-5 cd /path/to/project && /home/user/.local/bin/verctrl --new
+0 9-17 * * 1-5 cd /path/to/project && /home/user/.local/bin/versctrl --new
 ```
 
 #### Windows (Task Scheduler)
@@ -701,13 +688,13 @@ crontab -e
 2. Create Basic Task
 3. Set trigger (daily, weekly, etc.)
 4. Action: Start a program
-5. Program: `verctrl`
+5. Program: `versctrl`
 6. Arguments: `--new`
 7. Start in: `C:\path\to\project`
 
 ## Comparison with Git
 
-| Feature | verctrl | Git |
+| Feature | versctrl | Git |
 |---------|---------|-----|
 | Setup | Single command | Multiple commands |
 | Learning Curve | Minimal | Moderate to steep |
