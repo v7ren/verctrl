@@ -1,3 +1,4 @@
+
 # verctrl
 
 Lightweight version control CLI tool with smart file detection and PyQt6 GUI
@@ -24,17 +25,124 @@ verctrl is a simple yet powerful version control tool designed for quick file ba
 - PyQt6 (optional, for GUI features)
 - lucide-py (optional, for better icons)
 
-### Install Dependencies
+### Method 1: Install from PyPI (Recommended)
 
 ```bash
-# Core functionality only
+# Install verctrl globally
 pip install verctrl
 
 # With GUI support
+pip install verctrl[gui]
+
+# With all optional features
+pip install verctrl[all]
+```
+
+After installation, `verctrl` will be available globally in your terminal from any directory.
+
+### Method 2: Install from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/verctrl.git
+cd verctrl
+
+# Install in development mode
+pip install -e .
+
+# Or install with optional dependencies
+pip install -e .[all]
+```
+
+### Verify Installation
+
+```bash
+# Check if verctrl is accessible
+verctrl --help
+
+# Check version
+verctrl --version
+```
+
+### Setting Up PATH (If Needed)
+
+If `verctrl` is not recognized after installation, you may need to add Python's Scripts directory to your PATH:
+
+#### Windows
+
+```powershell
+# Find Python Scripts directory
+python -m site --user-site
+
+# Add to PATH (PowerShell - Admin)
+$pythonScripts = python -c "import site; print(site.USER_BASE + '\\Scripts')"
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$pythonScripts", "User")
+
+# Restart your terminal
+```
+
+Or manually:
+1. Open "Environment Variables" settings
+2. Edit "Path" under User variables
+3. Add: `C:\Users\YourUsername\AppData\Local\Programs\Python\Python3X\Scripts`
+4. Click OK and restart terminal
+
+#### macOS/Linux
+
+```bash
+# Find Python Scripts directory
+python3 -m site --user-base
+
+# Add to PATH (add to ~/.bashrc, ~/.zshrc, or ~/.bash_profile)
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+
+# Reload shell configuration
+source ~/.bashrc
+
+# For zsh users
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+#### Verify PATH Setup
+
+```bash
+# Check if verctrl is in PATH
+which verctrl  # macOS/Linux
+where verctrl  # Windows
+
+# Should output something like:
+# /home/username/.local/bin/verctrl
+# or C:\Users\Username\AppData\Local\Programs\Python\Python3X\Scripts\verctrl.exe
+```
+
+### Optional Dependencies
+
+```bash
+# Install GUI support separately
 pip install PyQt6
 
-# With enhanced icons
+# Install enhanced icons
 pip install lucide-py
+
+# Install all optional dependencies
+pip install PyQt6 lucide-py
+```
+
+### Upgrading
+
+```bash
+# Upgrade to latest version
+pip install --upgrade verctrl
+
+# Upgrade with all features
+pip install --upgrade verctrl[all]
+```
+
+### Uninstallation
+
+```bash
+pip uninstall verctrl
 ```
 
 ## Quick Start
@@ -42,6 +150,10 @@ pip install lucide-py
 ### 1. Initialize Configuration
 
 ```bash
+# Navigate to your project directory
+cd /path/to/your/project
+
+# Initialize verctrl
 verctrl --init
 ```
 
@@ -103,6 +215,31 @@ verctrl --restore filename-v1.txt
 ```
 
 Restores a specific backup to its original location.
+
+## Global Usage
+
+Once installed, you can use `verctrl` from anywhere:
+
+```bash
+# Backup your documents
+cd ~/Documents/important-project
+verctrl --init
+verctrl --smart-add smart
+verctrl --new
+
+# Backup your code
+cd ~/Code/my-app
+verctrl --init
+verctrl --select
+verctrl --new
+
+# Use different configs for different projects
+cd ~/project1
+verctrl --config project1.json --new
+
+cd ~/project2
+verctrl --config project2.json --new
+```
 
 ## Configuration
 
@@ -218,6 +355,12 @@ verctrl --restore FILENAME
 ```bash
 # Show statistics
 verctrl --stats
+
+# Show version
+verctrl --version
+
+# Show help
+verctrl --help
 
 # Use custom config file
 verctrl --config path/to/config.json
@@ -347,6 +490,7 @@ The PyQt6 GUI provides:
 Track source files while excluding dependencies:
 
 ```bash
+cd /path/to/project
 verctrl --init
 verctrl --smart-add smart
 verctrl --new
@@ -357,6 +501,7 @@ verctrl --new
 Track config files only:
 
 ```bash
+cd /path/to/configs
 verctrl --init
 # Manually edit verctrl.json to add config files
 verctrl --new
@@ -367,6 +512,7 @@ verctrl --new
 Track recently modified documents:
 
 ```bash
+cd ~/Documents/thesis
 verctrl --init
 verctrl --smart-add recent --days 7
 verctrl --new
@@ -377,9 +523,32 @@ verctrl --new
 Track web project files:
 
 ```bash
+cd ~/Sites/my-website
 verctrl --init
 verctrl --smart-add web
 verctrl --new
+```
+
+### Multiple Projects
+
+Manage backups across different projects:
+
+```bash
+# Setup project 1
+cd ~/project1
+verctrl --init
+verctrl --smart-add smart
+verctrl --new
+
+# Setup project 2
+cd ~/project2
+verctrl --init
+verctrl --smart-add python
+verctrl --new
+
+# Later, create backups from anywhere
+cd ~/project1 && verctrl --new
+cd ~/project2 && verctrl --new
 ```
 
 ## Best Practices
@@ -390,8 +559,27 @@ verctrl --new
 4. **Check Statistics**: Use `--stats` to monitor backup growth
 5. **Adjust History**: Set `keep_history` based on your needs
 6. **Custom Config**: Use `--config` for different project profiles
+7. **Per-Project Setup**: Initialize verctrl in each project directory
+8. **Backup Before Updates**: Create backups before major refactoring
 
 ## Troubleshooting
+
+### Command Not Found
+
+If `verctrl` is not recognized:
+
+```bash
+# Check if pip installed it correctly
+pip show verctrl
+
+# Check Python Scripts directory
+python -m site --user-base
+
+# Try running with python -m
+python -m verctrl --help
+```
+
+Then add the Scripts directory to your PATH (see installation section).
 
 ### PyQt6 Not Found
 
@@ -405,6 +593,11 @@ Ensure you have write permissions for:
 - Configuration file location
 - Backup directory
 - Tracked files
+
+On Unix systems:
+```bash
+chmod +x ~/.local/bin/verctrl
+```
 
 ### Missing Files Warning
 
@@ -424,6 +617,16 @@ Reduce `keep_history` or exclude large files:
 }
 ```
 
+### Import Errors
+
+If you get import errors:
+
+```bash
+# Reinstall with all dependencies
+pip uninstall verctrl
+pip install verctrl[all]
+```
+
 ## Advanced Usage
 
 ### Multiple Configurations
@@ -434,7 +637,73 @@ verctrl --config dev.json --new
 
 # Production config
 verctrl --config prod.json --new
+
+# Testing config
+verctrl --config test.json --new
 ```
+
+### Automation with Scripts
+
+#### Bash Script (Linux/macOS)
+
+```bash
+#!/bin/bash
+# backup-all.sh
+
+projects=(
+  "$HOME/Code/project1"
+  "$HOME/Code/project2"
+  "$HOME/Documents/thesis"
+)
+
+for project in "${projects[@]}"; do
+  echo "Backing up $project..."
+  cd "$project" && verctrl --new
+done
+```
+
+#### PowerShell Script (Windows)
+
+```powershell
+# backup-all.ps1
+
+$projects = @(
+  "$env:USERPROFILE\Code\project1",
+  "$env:USERPROFILE\Code\project2",
+  "$env:USERPROFILE\Documents\thesis"
+)
+
+foreach ($project in $projects) {
+  Write-Host "Backing up $project..."
+  Set-Location $project
+  verctrl --new
+}
+```
+
+### Scheduled Backups
+
+#### Linux/macOS (cron)
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add daily backup at 6 PM
+0 18 * * * cd /path/to/project && /home/user/.local/bin/verctrl --new
+
+# Add hourly backup during work hours
+0 9-17 * * 1-5 cd /path/to/project && /home/user/.local/bin/verctrl --new
+```
+
+#### Windows (Task Scheduler)
+
+1. Open Task Scheduler
+2. Create Basic Task
+3. Set trigger (daily, weekly, etc.)
+4. Action: Start a program
+5. Program: `verctrl`
+6. Arguments: `--new`
+7. Start in: `C:\path\to\project`
 
 ## Comparison with Git
 
@@ -447,7 +716,10 @@ verctrl --config prod.json --new
 | History | Configurable limit | Unlimited |
 | Collaboration | No | Yes |
 | Branching | No | Yes |
+| Merge Conflicts | No | Yes |
+| Global Install | Yes | Yes |
 | Best For | Quick backups, solo work | Team projects, complex history |
+
 
 ## License
 
