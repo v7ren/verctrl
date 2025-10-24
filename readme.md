@@ -47,8 +47,6 @@ After installation, `versctrl` will be available globally in your terminal from 
 # Check if versctrl is accessible
 versctrl --help
 
-# Check version
-versctrl --version
 ```
 
 ### Setting Up PATH (If Needed)
@@ -711,3 +709,4 @@ crontab -e
 ## License
 
 MIT License - See LICENSE file for details
+
